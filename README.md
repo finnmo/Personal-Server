@@ -28,7 +28,7 @@ Container to run program Portainer, a container management application.
 ~~### DuckDNS
 A container to run a DNS solution that automatically assigns SSL certificates and redirects incoming traffic through specified ports.~~
 ### Swag Instance
-Swag instance is a fantasic package containing NGIX reverse proxy and SSL encryption in one. This used with Cloudflares dynamic DNS assignment createds a protected, dedicated adress for each docker container.
+Swag instance is a fantasic package containing NGINX reverse proxy and SSL encryption in one. This used with Cloudflares dynamic DNS assignment createds a protected, dedicated adress for each docker container.
 eg: homeassistant.mydomain.com, nextcloud.mydomain.com..
 
 ### Kinect Body Tracker
