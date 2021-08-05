@@ -1,4 +1,5 @@
 
+
 # Personal Server
 ***Author: Finn Morris
 Created: 10/03/21
@@ -24,8 +25,11 @@ Container to run HomeAssistant, an open source home automation control platform.
 ### Portainer
 Container to run program Portainer, a container management application.
 
-### DuckDNS
-A container to run a DNS solution that automatically assigns SSL certificates and redirects incoming traffic through specified ports.
+~~### DuckDNS
+A container to run a DNS solution that automatically assigns SSL certificates and redirects incoming traffic through specified ports.~~
+### Swag Instance
+Swag instance is a fantasic package containing NGIX reverse proxy and SSL encryption in one. This used with Cloudflares dynamic DNS assignment createds a protected, dedicated adress for each docker container.
+eg: homeassistant.mydomain.com, nextcloud.mydomain.com..
 
 ### Kinect Body Tracker
 A C++ program based on NiTE examples from OpenKinect v2 that uses room positioning to execute HTTP POST commands
