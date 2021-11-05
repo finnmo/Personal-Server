@@ -19,7 +19,10 @@ Multi-purpose server running docker containers and constant C++ programs
 - OpenMediaVault v5.6
 - Docker
  
-# Purpose:
+# Backup:
+ Primary file storage is held directly on the servers 500Gb HDD and accessible through Nextcloud, a file storage service. The data on the 500Gb device is copied to Onedrive every 30 minutes for file access if Nextcloud fails. The 500Gb drive is also coppied to a 1Tb External SSD once a day in case of complete failure of the server.
+ 
+# Containers
 
 ### Nextcloud
 Container to run nextcloud self hosted service, a cloud based file storage system.
