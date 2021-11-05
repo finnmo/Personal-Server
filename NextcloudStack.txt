@@ -1,0 +1,48 @@
+---
+version: "2.1"
+services:
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+#    ports:
+#      - 8080:80
+    volumes:
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/nextcloud:/var/www/html
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/nextcloud/data:/var/www/html/data
+    networks:
+      # ONLY using an internal network and not exposing to the internet
+      - frontend
+      - backend
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    
+    
+  mariadb:
+    image: mariadb
+    command: --innodb-read-only-compressed=OFF
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=<rootpassword>
+      - TZ=<timezone>
+      - MYSQL_DATABASE=<databaseName>
+      - MYSQL_USER=<sqlusername>
+      - MYSQL_PASSWORD=<superSecretPassword>
+    volumes:
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/mariadb:/var/lib/mysql
+    networks:
+      # Use an internal network for the nextcloud services
+      - backend
+    restart: unless-stopped
+    
+# Declare networks at the high level to avoid confusion and to access those
+#   not initially started by this document.
+networks:
+  frontend:
+    external: true
+  backend:
