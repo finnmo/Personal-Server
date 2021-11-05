@@ -1,0 +1,40 @@
+version: '3'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    environment:
+      DB_MYSQL_HOST: <dbhostname>
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: <password>
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/nginx-proxy-manager/app/config:/app/config
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/nginx-proxy-manager/data:/data
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+    networks:
+      - frontend
+      - backend
+      
+  db:
+    image: 'jc21/mariadb-aria:latest'
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: <password>
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: <password>
+    volumes:
+      - /srv/dev-disk-by-uuid-a2b0e4ff-0f5d-44ad-8323-5f0641cba873/nginx-proxy-manager/data/mysql:/var/lib/mysql
+    networks:
+      - backend
+
+networks:
+  frontend:
+    external: true
+  backend:
